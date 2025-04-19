@@ -18,7 +18,7 @@ export default function VerseCard({ verse }) {
         <div className="mt-4">
           <p className="text-xl font-devanagari mb-4">{verse.text}</p>
           <p className="text-gray-200 dark:text-gray-300">
-            {verse.translations.find((t) => t.author_name === 'Swami Sivananda')?.description}
+            {verse.translations.find((t) => t.author_name === 'Swami Ramsukhdas')?.description}
           </p>
           <Link
             href={`/chapters/${verse.chapter_number}/verses/${verse.verse_number}`}
