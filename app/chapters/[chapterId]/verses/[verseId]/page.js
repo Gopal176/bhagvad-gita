@@ -1,13 +1,14 @@
 import { getVerse } from '../../../../../lib/api';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// Dynamically import client component
+const FavoriteButton = dynamic(() => import('../../../../../components/FavouriteButton'), { ssr: false });
 
 export default async function VersePage({ params }) {
   const { chapterId, verseId } = params;
-
-  // Fetch the specific verse
   const verse = await getVerse(chapterId, verseId);
 
-  // Handle case where verse is not found
   if (!verse || Object.keys(verse).length === 0) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
@@ -48,6 +49,13 @@ export default async function VersePage({ params }) {
         <p className="text-md text-gray-200 dark:text-gray-300">
           {verse.translations[0]?.description || 'Translation not available'}
         </p>
+
+        {/* Add to Favorites Button */}
+        <FavoriteButton
+          chapter={chapterId}
+          verse={verse.verse_number}
+      
+        />
       </div>
     </div>
   );
